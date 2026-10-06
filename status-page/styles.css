@@ -1,4 +1,6 @@
-/* Loftstage Status — dark, matching loftstage.com (Mona Sans, violet brand). */
+/* Loftstage Status — Mona Sans, neutral palette, dark + light themes.
+   Theme is data-theme on <html>, set before first paint by the inline
+   script in index.html (saved choice, else the OS preference). */
 
 @font-face {
   font-family: "Mona Sans";
@@ -16,15 +18,45 @@
   --muted: #918d9a;
   --border: #2a282e;
   --border-strong: #39373d;
-  --brand: #652de4;
-  --brand-bright: #8e79fe;
+  --accent: #ededed;
+  --accent-fg: #0a0a0a;
+  --icon-ink: #0a0a0a;
+  --header-bg: rgb(10 10 10 / 0.8);
+  --shadow: 0 12px 32px rgb(0 0 0 / 0.5);
   --up: #28a948;
   --partial: #ffae00;
   --major: #ff4d4d;
   --none: #26252a;
+  --up-text: var(--up);
+  --partial-text: var(--partial);
+  --major-text: var(--major);
   --radius: 12px;
   --wrap: 880px;
   font-family: "Mona Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --card-raised: #ffffff;
+  --fg: #171717;
+  --muted: #5f5f66;
+  --border: #e6e6e9;
+  --border-strong: #d4d4d8;
+  --accent: #171717;
+  --accent-fg: #ffffff;
+  --icon-ink: #ffffff;
+  --header-bg: rgb(250 250 250 / 0.8);
+  --shadow: 0 10px 28px rgb(0 0 0 / 0.12);
+  --up: #22a447;
+  --partial: #f0a000;
+  --major: #e5484d;
+  --none: #e9e9ec;
+  /* AA-contrast text tones on the light canvas */
+  --up-text: #0e6f2c;
+  --partial-text: #aa4d00;
+  --major-text: #d40019;
 }
 
 * { box-sizing: border-box; }
@@ -43,9 +75,11 @@ body {
   flex-direction: column;
 }
 
-a { color: var(--brand-bright); text-decoration: none; }
+a { color: var(--fg); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--brand-bright); outline-offset: 2px; border-radius: 4px; }
+.update a, .notice a, .banner a { text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; }
+.update a:hover, .notice a:hover, .banner a:hover { text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 4px; }
 
 h1, h2, h3 { margin: 0; letter-spacing: -0.01em; }
 
@@ -61,7 +95,7 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--border);
-  background: rgb(10 10 10 / 0.8);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -72,9 +106,9 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
 .brand-tag {
   font-size: 12px;
   font-weight: 500;
-  color: var(--brand-bright);
-  border: 1px solid rgb(142 121 254 / 0.35);
-  background: rgb(101 45 228 / 0.14);
+  color: var(--muted);
+  border: 1px solid var(--border-strong);
+  background: var(--card);
   padding: 2px 8px;
   border-radius: 999px;
 }
@@ -88,12 +122,27 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
   height: 32px;
   padding: 0 12px;
   border-radius: 8px;
-  background: var(--brand);
-  color: #fafafc;
+  background: var(--accent);
+  color: var(--accent-fg);
   font-weight: 500;
   white-space: nowrap;
 }
-.btn:hover { background: #5a26cf; text-decoration: none; }
+.btn:hover { opacity: 0.85; text-decoration: none; }
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--muted); }
+.theme-toggle svg { width: 16px; height: 16px; }
+:root[data-theme="light"] .icon-sun, :root:not([data-theme="light"]) .icon-moon { display: none; }
 
 /* ---------- Overall banner ---------- */
 .banner {
@@ -126,7 +175,7 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
   content: "";
   width: 14px;
   height: 14px;
-  background: #0a0a0a;
+  background: var(--icon-ink);
   -webkit-mask: var(--icon) center / contain no-repeat;
   mask: var(--icon) center / contain no-repeat;
 }
@@ -208,9 +257,9 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
 }
 .info:hover { color: var(--fg); border-color: var(--muted); }
 .component-status { font-size: 14px; font-weight: 500; white-space: nowrap; }
-.component-status[data-state="up"] { color: var(--up); }
-.component-status[data-state="degraded"] { color: var(--partial); }
-.component-status[data-state="down"] { color: var(--major); }
+.component-status[data-state="up"] { color: var(--up-text); }
+.component-status[data-state="degraded"] { color: var(--partial-text); }
+.component-status[data-state="down"] { color: var(--major-text); }
 
 .bars { display: flex; gap: 3px; height: 36px; }
 .bar {
@@ -253,7 +302,7 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
   border-radius: 10px;
   padding: 12px 14px;
   font-size: 13px;
-  box-shadow: 0 12px 32px rgb(0 0 0 / 0.5);
+  box-shadow: var(--shadow);
   pointer-events: none;
 }
 .tooltip.is-sticky { pointer-events: auto; }
@@ -273,8 +322,8 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
 .month-heading { margin: 36px 0 0; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .incident + .incident { margin-top: 18px; }
 .incident-title { display: inline-block; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-.incident-title[data-impact="major"] { color: var(--major); }
-.incident-title[data-impact="partial"] { color: var(--partial); }
+.incident-title[data-impact="major"] { color: var(--major-text); }
+.incident-title[data-impact="partial"] { color: var(--partial-text); }
 .incident-title[data-impact="none"] { color: var(--fg); }
 .incident-meta { font-size: 12px; color: var(--muted); margin: -2px 0 8px; }
 .update { margin: 0 0 10px; font-size: 14px; }
@@ -290,10 +339,13 @@ main.wrap { flex: 1; padding-top: 40px; padding-bottom: 64px; }
   padding: 0;
   font: inherit;
   font-size: 14px;
-  color: var(--brand-bright);
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
   cursor: pointer;
 }
-.link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.link-btn:hover { text-decoration-color: currentColor; }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }

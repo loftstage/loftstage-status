@@ -547,6 +547,25 @@ function wireTooltips() {
   window.addEventListener("scroll", hideTooltip, { passive: true });
 }
 
+// ---------- theme ----------
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#fafafa" : "#0a0a0a";
+  $("#theme-toggle").setAttribute("aria-label", theme === "light" ? "Switch to dark mode" : "Switch to light mode");
+}
+
+applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+$("#theme-toggle").addEventListener("click", () => {
+  const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  applyTheme(next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch {
+    /* private mode: the choice just won't persist */
+  }
+});
+
 // ---------- boot ----------
 
 async function refresh() {
