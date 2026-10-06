@@ -6,7 +6,7 @@
 //   GitHub issues          incidents: label "status" + the monitor's slug label
 "use strict";
 
-const OWNER = "minimondocode";
+const OWNER = "loftstage";
 const REPO = "loftstage-status";
 const BRANCH = "master";
 const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
