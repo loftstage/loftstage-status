@@ -32,8 +32,8 @@ const COMPONENTS = [
   },
   {
     slug: "loftstage-event-pages-edge",
-    name: "Event pages",
-    description: "Public event and ticket pages, served from our edge network.",
+    name: "Edge & assets",
+    description: "Our edge network and file storage: the fonts, scripts and images every public page loads.",
   },
   {
     slug: "loftstage-marketing-site",

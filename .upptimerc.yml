@@ -14,13 +14,11 @@ sites:
     __dangerous__body_down_if_text_missing: '"status":"healthy"'
   - name: Loftstage Marketing Site
     url: https://loftstage.com
+  # Edge + R2 asset path: the font every public page loads. Must be a 200 —
+  # the old /fonts/ directory probe accepted 404 and never proved anything.
+  # Name kept so the monitor's history slug (loftstage-event-pages-edge) survives.
   - name: Loftstage Event Pages (edge)
-    url: https://assets.loftstage.com/fonts/
-    expectedStatusCodes:
-      - 200
-      - 301
-      - 403
-      - 404
+    url: https://assets.loftstage.com/fonts/mona-sans.woff2
   # Venue-page probe — the attendee purchase surface (worker + wildcard DNS +
   # R2 + cache). Currently points at the seeded demo venue; TODO(launch):
   # re-point at the first real venue's org slug once one is live.
