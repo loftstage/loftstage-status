@@ -28,8 +28,7 @@ sites:
     url: https://loftstage.com/the-velvet-note
 
 status-website:
-  cname: false
-  baseUrl: /loftstage-status
+  cname: status.loftstage.com
   name: Loftstage Status
   introTitle: "**Loftstage** service status"
   introMessage: Live status and incident history for [Loftstage](https://loftstage.com).
