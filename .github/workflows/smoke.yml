@@ -1,0 +1,27 @@
+# Daily smoke of the live status page (scripts/smoke.mjs): opens
+# https://status.loftstage.com in headless Chromium and fails unless real data
+# rendered. Also runs after every "Status page" deploy. A failure emails the
+# workflow's author via GitHub's failed-workflow notification.
+# Not an Upptime template file, so update-template.yml leaves it alone.
+name: Status page smoke
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_run:
+    workflows: ["Status page"]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-package-lock playwright@1
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/smoke.mjs
