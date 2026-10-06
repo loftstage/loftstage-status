@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loftstage Status</title>
+    <meta name="description" content="Live status, 90-day uptime and incident history for Loftstage." />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta property="og:title" content="Loftstage Status" />
+    <meta property="og:description" content="Live status, 90-day uptime and incident history for Loftstage." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preload" href="https://assets.loftstage.com/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="./" aria-label="Loftstage Status home">
+          <span class="wordmark">Loftstage</span>
+          <span class="brand-tag">Status</span>
+        </a>
+        <nav class="header-nav">
+          <a href="#incidents">Incidents</a>
+          <a class="btn" href="https://loftstage.com" rel="noopener">loftstage.com <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="banner" class="banner banner--loading" aria-live="polite">
+        <span class="banner-icon" aria-hidden="true"></span>
+        <div class="banner-text">
+          <h1 id="banner-title">Checking status…</h1>
+          <p id="banner-sub" class="muted">Fetching the latest checks.</p>
+        </div>
+      </section>
+
+      <section id="active-incidents" class="active-incidents" hidden></section>
+
+      <section class="panel" aria-labelledby="components-title">
+        <div class="panel-head">
+          <h2 id="components-title">Uptime over the past <span data-days-label>90</span> days</h2>
+          <ul class="legend" aria-label="Legend">
+            <li><span class="swatch swatch--up"></span>Operational</li>
+            <li><span class="swatch swatch--partial"></span>Partial outage</li>
+            <li><span class="swatch swatch--major"></span>Major outage</li>
+            <li><span class="swatch swatch--none"></span>No data</li>
+          </ul>
+        </div>
+        <ul id="components" class="components">
+          <li class="component component--skeleton"><div class="sk sk-line"></div><div class="sk sk-bars"></div></li>
+          <li class="component component--skeleton"><div class="sk sk-line"></div><div class="sk sk-bars"></div></li>
+          <li class="component component--skeleton"><div class="sk sk-line"></div><div class="sk sk-bars"></div></li>
+        </ul>
+      </section>
+
+      <section id="incidents" class="incidents" aria-labelledby="incidents-title">
+        <h2 id="incidents-title">Past incidents</h2>
+        <div id="incident-days"></div>
+        <button id="history-toggle" class="link-btn" type="button" hidden>Show full incident history</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>Checked every 5 minutes · times in UTC</span>
+        <span id="updated-at"></span>
+      </div>
+    </footer>
+
+    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

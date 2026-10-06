@@ -27,6 +27,13 @@ sites:
   - name: Loftstage Venue Pages
     url: https://loftstage.com/the-velvet-note
 
+# The public page at status.loftstage.com is our own static site in
+# status-page/, deployed by .github/workflows/status-page.yml (Pages source:
+# GitHub Actions). Upptime's generated site is switched off; its site.yml
+# workflow is disabled in the Actions UI. The block below is kept for the
+# README's links.
+skipGeneratingWebsite: true
+
 status-website:
   cname: status.loftstage.com
   name: Loftstage Status

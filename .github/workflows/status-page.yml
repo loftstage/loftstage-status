@@ -1,0 +1,33 @@
+# Custom status page (status-page/) — replaces Upptime's generated site.
+# Not an Upptime template file, so update-template.yml leaves it alone.
+# The page reads history/ and issues live in the browser, so it only needs
+# redeploying when status-page/ itself changes.
+name: Status page
+on:
+  push:
+    branches: [master]
+    paths:
+      - "status-page/**"
+      - ".github/workflows/status-page.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: status-page
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: status-page
+      - id: deployment
+        uses: actions/deploy-pages@v4
