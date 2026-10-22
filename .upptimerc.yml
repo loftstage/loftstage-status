@@ -24,6 +24,12 @@ sites:
   # re-point at the first real venue's org slug once one is live.
   - name: Loftstage Venue Pages
     url: https://loftstage.com/the-velvet-note
+  # Scanner API (door app): the scan route group + the client gate's Redis
+  # read. Public, rate-limited 60/min per IP. The name is load-bearing: the
+  # pager titles it "scanner down" by matching PAGER_SCANNER_SITE_NAME in
+  # apps/dashboard/lib/alerts/pager/providers.ts — rename both together.
+  - name: Loftstage Scanner API
+    url: https://app.loftstage.com/api/scan/client-policy
 
 # The public page at status.loftstage.com is our own static site in
 # status-page/, deployed by .github/workflows/status-page.yml (Pages source:
