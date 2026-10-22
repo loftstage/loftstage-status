@@ -45,21 +45,17 @@
     "icon": "https://icons.duckduckgo.com/ip3/loftstage.com.ico",
     "slug": "loftstage-marketing-site",
     "status": "up",
-    "uptime": "97.90%",
+    "uptime": "100.00%",
     "uptimeDay": "100.00%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
-    "uptimeYear": "97.90%",
+    "uptimeYear": "100.00%",
     "time": 1364,
     "timeDay": 1301,
     "timeWeek": 714,
     "timeMonth": 1246,
     "timeYear": 1364,
-    "dailyMinutesDown": {
-      "2026-07-06": 1110,
-      "2026-07-05": 1440,
-      "2026-07-04": 779
-    }
+    "dailyMinutesDown": {}
   },
   {
     "name": "Loftstage Event Pages (edge)",
